@@ -4,19 +4,19 @@ on:
   push:
     branches: 
       - master
-#  release:
-#    types: published
-#  schedule:
-#    - cron: 0 8 * * 5
-#  watch:
-#    types: started
-#  repository_dispatch:
+  release:
+    types: published
+  schedule:
+    - cron: 0 8 * * 5
+  watch:
+    types: started
+  repository_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-18.04
     if: github.event.repository.owner.id == github.event.sender.id
-#    timeout-minutes: 360
+    timeout-minutes: 360
 
     steps:
     - name: Clone Repository
@@ -46,8 +46,8 @@ jobs:
         /bin/bash ${GITHUB_WORKSPACE}/before_build.sh
         cp -fpR ${GITHUB_WORKSPACE}/. /home/runner/immortalwrt/
 
-#    - name: SSH connection to Actions
-#      uses: csexton/debugger-action@master
+    - name: SSH connection to Actions
+     uses: csexton/debugger-action@master
 
     - name: Start Build
       run: | 
